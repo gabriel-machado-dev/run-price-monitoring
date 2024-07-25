@@ -26,14 +26,3 @@
         iv. Link(link direto para o produto)
     3. Automatização Recorrente:
       ○ Criar um agendamento para que o bot rode de 30 em 30 minutos
-
-
-# acessar o site
-# pesquisar o produto 
-# pegar o preço do produto 
-# armazenar numa planilha excel os seguintes dados
-  # produto
-  # data atual
-  # valor
-  # link
-# fazer o agendamento do script
