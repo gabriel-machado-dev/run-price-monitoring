@@ -114,13 +114,10 @@ def run_price_monitoring():
           wb = openpyxl.load_workbook(file_path)
           sheet = wb.active
           
-          # clear the data in the file before saving the new data
-          for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row):
-              for cell in row:
-                  cell.value = None
-
+          # Clear existing data except for the header by deleting rows
+          sheet.delete_rows(2, sheet.max_row)
+          
       else:
-          # create a new file if it does not exist and add the headers
           wb = openpyxl.Workbook()
           sheet = wb.active
           sheet.append(['Product', 'Date', 'Price', 'Link'])
@@ -140,3 +137,5 @@ def run_price_monitoring():
       wb.close()
     return True
   save_data_excel()
+
+run_price_monitoring()
