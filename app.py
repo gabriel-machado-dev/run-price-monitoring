@@ -2,7 +2,6 @@ from time import sleep
 import schedule
 from main_functions import run_price_monitoring
 
-
 # schedule the task
 schedule.every(30).minutes.do(run_price_monitoring)
 

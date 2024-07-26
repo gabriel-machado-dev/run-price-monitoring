@@ -129,6 +129,8 @@ def run_price_monitoring():
       
       wb.save('products.xlsx')
       print('Data saved successfully')
+      print('Copy the path below and paste it into the file explorer to open the file')
+      print(f'The path where the file was saved: {os.path.abspath("products.xlsx")}')
     except Exception as e:
       lg.error(f'Error occurred while saving data to excel: {type(e).__name__} - {e}')
       print('An error occurred while saving the data to the excel file')
