@@ -99,12 +99,19 @@ def run_price_monitoring():
       return None
 
     return products_data
+  
+  def clean_price(price_str):
+    # Remove any commas and convert to float
+    return float(price_str.replace(',', '').replace('.', '', price_str.count('.') - 1))
 
   # save data to excel file
   def save_data_excel():
     products_data = search_product()
     if not products_data:
       return None
+    
+    # Sort products_data by price (assuming price is the third element in the tuple)
+    products_data = sorted(products_data, key=lambda x: clean_price(x[2]))
     
     file_path = 'products.xlsx'
     
@@ -125,6 +132,7 @@ def run_price_monitoring():
       for product in products_data:
           # save the data to the file
           sheet.append(product)
+      
 
       
       wb.save('products.xlsx')
