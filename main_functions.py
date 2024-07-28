@@ -199,7 +199,7 @@ def run_price_monitoring():
             print("Data saved successfully")
             sleep(2)
             
-            print(f"Data saved to:  {file_path}")
+            print(f"Data saved to the folder: {os.getcwd()}")
             
             open_file = input("Do you want to open the file? (y/n): ")
             if open_file.lower() == "y":
