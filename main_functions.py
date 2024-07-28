@@ -171,5 +171,13 @@ def run_price_monitoring():
 
     save_data_excel()
 
+while True:
+    run_bot = input("Do you want to run the price monitoring bot? (y/n): ")
+    if run_bot.lower() == "y":
+        run_price_monitoring()
+    else:
+        break
+    
+    
 
-run_price_monitoring()
+
