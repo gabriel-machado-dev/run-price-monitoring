@@ -171,6 +171,7 @@ def run_price_monitoring():
 
     save_data_excel()
 
+# Run the price monitoring bot if the user wants to run it again after the first run 
 while True:
     run_bot = input("Do you want to run the price monitoring bot? (y/n): ")
     if run_bot.lower() == "y":
