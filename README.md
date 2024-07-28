@@ -6,7 +6,7 @@
 
 1. Search for products: The user type the product of his wish.
 2. Extract the data: Extract the data as it follows:  Product name, extraction date, product price and its link
-3. Store data Excel: Get all the data extract of your product and stores in a excel file named: **products.xlsx**
+3. Store data Excel: Get all the data extract of your product and stores in a excel file named: **name of the product**
 
 #### Tecnologies
 
@@ -19,6 +19,7 @@
   - pip install -r requirementes.txt
   - run app.py
 
-Run app.py and in the terminal type the name of the product and the magic happens, a file excel is created with all the information described above.
+Run app.py and in the terminal type the name of the product and the magic happens, a file excel is created with all the information described above, 
+you can open it if want and stop bot if you wish not to continue.
 
 *OBS: The script will run every 30 min
