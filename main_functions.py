@@ -9,6 +9,35 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import *
 from selenium.webdriver.chrome.options import Options
 import logging as lg
+from tqdm import tqdm
+
+
+RED = '\033[91m'
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+BLUE = '\033[94m'
+MAGENTA = '\033[95m'
+CYAN = '\033[96m'
+RESET = '\033[0m'
+BOLD = '\033[1m'
+
+print(CYAN + BOLD + r'''
+                                                          _|___                         
+                    _|_|_|      _|__     _        _      |     |   \     /
+                    _|    _|    _|  |    |        |      |      |   \   /
+                    _|    _|    _|__      |_    _|       |  ___|     \_/
+                    _|    _|    _|         |    |        |            |
+                    _|_|_|      -|__|       |__|       .  |           |  
+                                                                              
+                                                                           
+                                  Price Monitoring Bot 
+''' + RESET)
+
+# Simulate a loading bar
+# Barra de carregamento padrão
+print("Loading Bot:")
+for _ in tqdm(range(100), desc="Loading", ncols=75):
+    sleep(0.05)
 
 
 def run_price_monitoring():
