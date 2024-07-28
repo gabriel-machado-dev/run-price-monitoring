@@ -1,5 +1,6 @@
 import openpyxl
 import os
+from time import sleep
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -13,6 +14,8 @@ import logging as lg
 def run_price_monitoring():
     # run driver and wait for the page to load
     def run_driver(site_url):
+        print("Initializing the driver")
+        sleep(1)
         try:
             chorme_options = Options()
 
@@ -84,6 +87,7 @@ def run_price_monitoring():
         )
 
         # a list to store the product_name, data_atual, product_price and link
+        print("Extracting product data")
         products_data = []
 
         try:
@@ -111,6 +115,9 @@ def run_price_monitoring():
                     f"Price: R$ {product_price}\n"
                     f"Link: {link}\n"
                 )
+                
+            print('Product data extracted successfully')
+            sleep(2)
 
         except Exception as e:
             lg.error(
@@ -129,6 +136,7 @@ def run_price_monitoring():
 
     # save data to excel file
     def save_data_excel():
+       
         products_data, search_product_ = search_product()
         if not products_data:
             return None
@@ -150,15 +158,18 @@ def run_price_monitoring():
             for product in products_data:
                 # save the data to the file
                 sheet.append(product)
-
+                
+            print("Saving data to excel")
+            sleep(2)
             wb.save(file_path)
+            
             print("Data saved successfully")
-            print(
-                "Copy the path below and paste it into the file explorer to open the file"
-            )
-            print(
-                f'The path where the file was saved: {os.path.abspath("products.xlsx")}'
-            )
+            sleep(2)
+            
+            open_file = input("Do you want to open the file? (y/n): ")
+            if open_file.lower() == "y":
+                os.startfile(file_path)
+                
         except Exception as e:
             lg.error(
                 f"Error occurred while saving data to excel: {type(e).__name__} - {e}"
@@ -167,8 +178,9 @@ def run_price_monitoring():
             return None
         finally:
             wb.close()
-        return True
-
+            
+            return file_path
+    
     save_data_excel()
 
 # Run the price monitoring bot if the user wants to run it again after the first run 
@@ -178,7 +190,5 @@ while True:
         run_price_monitoring()
     else:
         break
-    
-    
 
 
