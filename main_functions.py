@@ -23,7 +23,7 @@ def run_price_monitoring():
                 "--lang=pt-BR",
                 "--window-size=1300,1000",
                 "--disable-notifications",
-                "--incognito",
+                "--incognito"
             ]
             for argument in arguments:
                 chorme_options.add_argument(argument)
@@ -71,7 +71,7 @@ def run_price_monitoring():
             lg.error(
                 f"Error occurred while initializng driver: {type(e).__name__} - {e}"
             )
-            return None
+            return None, None
 
     # acess website buscape
     def search_product():
@@ -85,9 +85,15 @@ def run_price_monitoring():
         driver, wait = run_driver(
             f"https://www.buscape.com.br/search?q={search_product_}"
         )
+        
+        if driver is None or wait is None:
+            print("Failed to initialize the driver")
+            return None, None
 
         # a list to store the product_name, data_atual, product_price and link
         print("Extracting product data")
+        sleep(2)
+        
         products_data = []
 
         try:
@@ -108,23 +114,22 @@ def run_price_monitoring():
                 link = item.find_element(By.XPATH, "./a").get_attribute("href")
 
                 products_data.append((product_name, data_atual, product_price, link))
-
-                print(
-                    f"Product: {product_name}\n"
-                    f"Date: {data_atual}\n"
-                    f"Price: R$ {product_price}\n"
-                    f"Link: {link}\n"
-                )
-                
+            
+            sleep(1)    
             print('Product data extracted successfully')
             sleep(2)
+            
+        except TimeoutException as e:
+            lg.error(f"TimeoutException occurred while searching for the product: {e}")
+            print("Timeout occurred while extracting the product data. Please try again.")
+            return None, None
 
         except Exception as e:
             lg.error(
                 f"Error occurred while searching for the product: {type(e).__name__} - {e}"
             )
             print("An error occurred while extracting the product data")
-            return None
+            return None, None
 
         return products_data, search_product_
 
@@ -144,7 +149,7 @@ def run_price_monitoring():
         # Sort products_data by price (assuming price is the third element in the tuple)
         products_data = sorted(products_data, key=lambda x: clean_price(x[2]))
 
-        file_path = f"{search_product_}.xlsx"
+        file_path = f"{search_product_.strip()}.xlsx"
 
         try:
             # check if the file exists
@@ -166,10 +171,12 @@ def run_price_monitoring():
             print("Data saved successfully")
             sleep(2)
             
+            print(f"Data saved to:  {file_path}")
+            
             open_file = input("Do you want to open the file? (y/n): ")
             if open_file.lower() == "y":
                 os.startfile(file_path)
-                
+            
         except Exception as e:
             lg.error(
                 f"Error occurred while saving data to excel: {type(e).__name__} - {e}"
