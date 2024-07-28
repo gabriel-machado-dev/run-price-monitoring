@@ -128,7 +128,7 @@ def run_price_monitoring():
         )
 
     # save data to excel file
-    def save_data_excel(search_product_):
+    def save_data_excel():
         products_data, search_product_ = search_product()
         if not products_data:
             return None

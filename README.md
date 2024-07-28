@@ -10,17 +10,14 @@
 
 #### Tecnologies
 
-1. Openpyxl
-2. Selenium
-3. Schedule
-4. Datetime
-5. OS
-6. logging
+- `selenium`, `openpyxl`, `datetime`, `os`, `logging`
 
 #### How to use:
 
 - Install depedencies
+  - git clone this repository
   - pip install -r requirementes.txt
+  - run app.py
 
 Run app.py and in the terminal type the name of the product and the magic happens, a file excel is created with all the information described above.
 
