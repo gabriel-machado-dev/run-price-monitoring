@@ -19,6 +19,7 @@
   - pip install -r requirementes.txt
   - run app.py
 
-Run app.py and in the terminal type the name of the product and the magic happens, a file excel is created with all the information described above.
+Run app.py and in the terminal type the name of the product and the magic happens, a file excel is created with all the information described above, 
+you can open it if want and stop bot if you wish not to continue.
 
 *OBS: The script will run every 30 min
