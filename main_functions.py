@@ -203,7 +203,13 @@ def run_price_monitoring():
             
             open_file = input("Do you want to open the file? (y/n): ")
             if open_file.lower() == "y":
-                os.startfile(file_path)
+                if os.name == "posix":
+                    os.system(f"open {file_path}")
+                elif os.name == "nt":
+                    os.startfile(file_path)
+                else:
+                    print("Unsupported operating system.")
+            
             
         except Exception as e:
             lg.error(
